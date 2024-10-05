@@ -1,6 +1,27 @@
 const taskForm = document.getElementById("task-form")
 const taskInput = document.getElementById("task-input")
 const taskList = document.getElementById("task-list")
+const themeToggleBtn= document.getElementById('themeToggle')
+
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme) {
+    document.body.classList.add(currentTheme);
+    themeToggleBtn.textContent= currentTheme=== 'dark-mode'? '🌙': '🌻'
+}
+
+// Add event listener to the toggle button
+themeToggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+
+    // Save the theme preference in localStorage
+    if (document.body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent='🌙';
+        localStorage.setItem('theme', 'dark-mode');
+    } else {
+        themeToggleBtn.textContent = '🌻';
+        localStorage.removeItem('theme');
+    }
+});
 
 
 // create tasks to store tasks
